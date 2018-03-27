@@ -1,0 +1,3 @@
+rootProject.name = 'todoappreactnative'
+
+include ':app'
