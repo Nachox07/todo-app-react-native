@@ -1,38 +1,53 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
+import Item from '../components/Item';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+    },
+    List: {
+        width: '95%',
+    },
 });
 
-class List extends React.Component {
+const items = [
+    {
+        key: 'Orange',
+    },
+    {
+        key: 'Apple',
+    },
+    {
+        key: 'Pear',
+    },
+];
+
+export default class List extends React.Component {
   static navigationOptions = {
-    title: 'List',
+      title: 'List',
   };
+
+  renderItem = ({ item }) => (
+      <Item
+          data={item}
+      />
+  );
 
   render() {
-    console.log(this.props);
+      console.log(this.props);
 
-    return (
-      <View style={styles.container}>
-          <Text>To-Do App</Text>
-      </View>
-    );
+      return (
+          <View style={styles.container}>
+              <FlatList
+                  data={items}
+                  renderItem={this.renderItem}
+                  style={styles.List}
+              />
+          </View>
+      );
   }
 }
-
-function mapStateToProps(state) {
-  const { todoList } = state;
-
-  return {
-    todoList,
-  };
-}
-
-export default connect(mapStateToProps)(List);

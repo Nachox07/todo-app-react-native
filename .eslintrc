@@ -18,7 +18,7 @@
   "rules" : {
     "arrow-body-style" : "warn",
     "import/prefer-default-export": false,
-    "indent": [2],
+    "indent": [2,4],
     "no-named-as-default-member" : false,
     "react/prop-types": 0
   }
