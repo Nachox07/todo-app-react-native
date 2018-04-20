@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
 import Item from '../components/Item';
 
 const styles = StyleSheet.create({
@@ -14,36 +15,22 @@ const styles = StyleSheet.create({
     },
 });
 
-const items = [
-    {
-        key: 'Orange',
-    },
-    {
-        key: 'Apple',
-    },
-    {
-        key: 'Pear',
-    },
-];
-
-export default class List extends React.Component {
+class List extends React.Component {
   static navigationOptions = {
       title: 'List',
   };
 
   renderItem = ({ item }) => (
       <Item
-          data={item}
+          data={item.key}
       />
   );
 
   render() {
-      console.log(this.props);
-
       return (
           <View style={styles.container}>
               <FlatList
-                  data={items}
+                  data={this.props.todoList}
                   renderItem={this.renderItem}
                   style={styles.List}
               />
@@ -51,3 +38,13 @@ export default class List extends React.Component {
       );
   }
 }
+
+const mapStateToProps = (state) => {
+    const { todoList } = state;
+
+    return {
+        todoList,
+    };
+};
+
+export default connect(mapStateToProps, null)(List);

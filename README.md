@@ -1,2 +1,4 @@
 # todo-app-react-native
-A simple to-do app using react native + redux
+Simple To Do app developed on React Native introducing Redux with the Single source of truth pattern with Redux
+
+Presentation: http://bit.ly/IntroToReactNativeMalaga

@@ -1,7 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
+import { addTodo } from '../modules/actions';
 
 const styles = StyleSheet.create({
+    bottomText: {
+        marginTop: 15,
+    },
     button: {
         alignItems: 'center',
         backgroundColor: '#333',
@@ -35,7 +40,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class Form extends React.Component {
+class Form extends React.Component {
   static navigationOptions = {
       title: 'Form',
   };
@@ -49,7 +54,8 @@ export default class Form extends React.Component {
   }
 
   addNewTask = () => {
-      console.log(this.state.inputValue);
+      this.props.addIt(this.state.inputValue);
+      this.props.navigation.navigate('list');
   }
 
   handleInputValueChange = (value) => {
@@ -62,6 +68,12 @@ export default class Form extends React.Component {
       const {
           inputValue,
       } = this.state;
+
+      const {
+          todoList,
+      } = this.props;
+
+      const lastElementAdded = (todoList.length > 0) ? todoList[todoList.length - 1].text : '';
 
       return (
           <View style={styles.container}>
@@ -84,7 +96,14 @@ export default class Form extends React.Component {
               >
                   <Text style={styles.buttonText}>Add</Text>
               </TouchableOpacity>
+              <Text style={styles.bottomText}>{ lastElementAdded }</Text>
           </View>
       );
   }
 }
+
+const mapDispatchToProps = ({
+    addIt: text => addTodo(text),
+});
+
+export default connect(null, mapDispatchToProps)(Form);

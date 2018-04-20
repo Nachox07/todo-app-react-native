@@ -19,7 +19,7 @@ export default class Item extends React.Component {
                 <View
                     style={styles.view}
                 >
-                    <Text>{ data.key }</Text>
+                    <Text>{ data }</Text>
                 </View>
             </TouchableOpacity>
         );
